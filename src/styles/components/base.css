@@ -1,0 +1,9 @@
+body {
+    @apply !m-0 !p-0;
+    mso-line-height-rule: exactly;
+}
+
+.preheader {
+    @apply hidden max-h-0 max-w-0 text-[1px] leading-[1px] opacity-0 overflow-hidden;
+    mso-hide:all;
+}

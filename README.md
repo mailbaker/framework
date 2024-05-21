@@ -1,2 +1,2 @@
-# email-framework
-MailBaker email framework
+# MailBaker email framework
+
