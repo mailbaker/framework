@@ -1,24 +1,98 @@
 <script props>
+
+    const backgroundUrl = props['background-url'] || ''
+    const backgroundColor = props['background-color'] || ''
+    const backgroundPosition = props['background-position'] || 'top center' // top, center, left, right, bottom. Max 2 values
+    const backgroundSize = props['background-size'] || 'auto' // auto, cover, contain
+    const backgroundRepeat = props['background-repeat'] || 'repeat' // no-repeat,repeat
+
+    let bgImage = '';
+    let bgColor = '';
+
+    if (backgroundUrl) {
+        bgImage = 'background: ' + backgroundColor + ' url(' + backgroundUrl + ') ' + backgroundPosition + ' / ' + backgroundSize + ' ' + backgroundRepeat + '; ' +
+        'background-position: ' + backgroundPosition + ';' +
+        'background-repeat: ' + backgroundRepeat + ';' +
+        'background-size: ' + backgroundSize + ';';
+    }
+
+    if (backgroundColor) {
+        bgColor = 'background-color: ' + backgroundColor + ';';
+    }
+
+    let backgroundStyle = bgImage + bgColor;
+
+    function msoBgPosition() {
+        const posSplit = backgroundPosition.split(' ');
+
+        const val1 = posSplit[0] === 'top' ? '-0.5' : (posSplit[0] === 'bottom' ? '0.5' : '0');
+        const val2 = posSplit[1] === 'left' ? '-0.5' : (posSplit[0] === 'right' ? '0.5' : '0');
+
+        return val2 + ',' + val1
+    }
+
+    function msoBgType() {
+        return backgroundRepeat === 'no-repeat' ? 'frame' : 'tile'
+    }
+
+    function msoBgAspect() {
+        return backgroundSize === 'cover' ? 'atleast' : 'atmost'
+    }
+
     module.exports = {
-        paddingTop: props.paddingTop ? props.paddingTop : '20',
-        paddingBottom: props.paddingBottom ? props.paddingBottom : '20',
+        paddingTop: props['padding-top'] || '20',
+        paddingBottom: props['padding-bottom'] || '20',
+        backgroundUrl,
+        backgroundStyle,
+        backgroundColor,
+        msoBgPosition: msoBgPosition(),
+        msoBgType: msoBgType(),
+        msoBgAspect: msoBgAspect(),
     }
 </script>
 
-<table class="container" align="center">
-    <if condition="paddingTop">
-        <tr>
-            <td height="{{ paddingTop }}" style="line-height: {{ paddingTop }}px"></td>
-        </tr>
-    </if>
+<table align="center" width="100%" background="{{ backgroundUrl }}" style="{{ backgroundStyle }}">
     <tr>
-        <td>
-            <yield></yield>
+        <td align="center" valign="top">
+
+            <if condition="backgroundUrl">
+                <!--[if mso | IE]>
+                <v:rect style="mso-width-percent:1000;" xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false">
+                    <v:fill origin="{{ msoBgPosition }}" position="{{ msoBgPosition }}" src="{{ backgroundUrl }}" color="{{ backgroundColor }}" type="{{ msoBgType }}" size="1,1" aspect="{{ msoBgAspect }}" />
+                    <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
+                <![endif]-->
+                <div>
+            </if>
+
+            <table align="center" width="100%">
+
+                <if condition="paddingTop">
+                    <tr>
+                        <td height="{{ paddingTop }}" style="line-height: {{ paddingTop }}px"></td>
+                    </tr>
+                </if>
+
+                <tr>
+                    <td align="center">
+
+                        <yield></yield>
+
+                    </td>
+                </tr>
+
+                <if condition="paddingBottom">
+                    <tr>
+                        <td height="{{ paddingBottom }}" style="line-height: {{ paddingBottom }}px"></td>
+                    </tr>
+                </if>
+
+            </table>
+
+            <if condition="backgroundUrl">
+                </div>
+                <!--[if mso | IE]></v:textbox></v:rect><![endif]-->
+            </if>
+
         </td>
     </tr>
-    <if condition="paddingBottom">
-        <tr>
-            <td height="{{ paddingBottom }}" style="line-height: {{ paddingBottom }}px"></td>
-        </tr>
-    </if>
 </table>
