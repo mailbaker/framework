@@ -64,6 +64,28 @@ export default {
             css: {
                 enabled: false,
             },
-        })
-    ]
+        }),
+        htmlwatch(),
+    ],
+}
+
+// Watch .html files
+function htmlwatch() {
+    return {
+        name: 'htmlwatch',
+        enforce: 'post',
+        // HMR
+        handleHotUpdate({ file, server }) {
+            if (file.endsWith('.html')) {
+                console.log('reloading html file...');
+                // To restart
+                server.restart()
+                // To reload
+                /* server.ws.send({
+                 *   type: 'full-reload',
+                 *   path: '*'
+                 * }); */
+            }
+        },
+    }
 }
