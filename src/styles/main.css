@@ -1,5 +1,7 @@
 /*Components*/
 @import "components/base.css";
+@import "components/grid.css";
+@import "components/typography.css";
 
 /*Tailwind Components*/
 @tailwind components;

@@ -3,6 +3,15 @@ export default {
     content: [
         './src/**/*.{js,html}'
     ],
+    safelist: [],
+    corePlugins: {
+        preflight: false,
+        backgroundOpacity: false,
+        borderOpacity: false,
+        divideOpacity: false,
+        placeholderOpacity: false,
+        textOpacity: false,
+    },
     theme: {
         extend: {
             fontFamily: {
@@ -82,6 +91,8 @@ export default {
             normal: "150%",
             relaxed: "162.5%",
             loose: "200%",
+            1: "4px",
+            2: "8px",
             3: "12px",
             4: "16px",
             5: "20px",
@@ -160,14 +171,5 @@ export default {
             xs: {'max': '424px'},
         },
 
-    },
-    safelist: [],
-    corePlugins: {
-        preflight: false,
-        backgroundOpacity: false,
-        borderOpacity: false,
-        divideOpacity: false,
-        placeholderOpacity: false,
-        textOpacity: false,
     }
 }

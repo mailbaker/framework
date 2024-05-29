@@ -10,8 +10,7 @@ export default {
     build: {
         rollupOptions: {
             input: [
-                './src/templates/**/*.{json,html}',
-                '!./src/templates/**/*.{html}.json'
+                './src/templates/**/*.html',
             ],
         },
     },

@@ -1,0 +1,11 @@
+.mb-container {
+    @apply w-[640px] max-w-[640px] mx-auto sm:!w-full sm:!min-w-full
+}
+
+.mb-row {
+    @apply sm:!px-5
+}
+
+.mb-col {
+    @apply sm:!block sm:!w-full
+}
