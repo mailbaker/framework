@@ -37,11 +37,15 @@
     <style> @import "/src/styles/main.css"; </style>
 </head>
 <body style="background-color: {{ backgroundColor }};">
+
     <if condition="preheader">
         <div class="preheader" aria-hidden="true">{{ preheader }}</div>
     </if>
+
     <center class="document" role="article" aria-roledescription="email" lang="{{ lang }}" dir="{{ dir }}" style="background-color: {{ backgroundColor }};">
+
         <yield></yield>
+
     </center>
 </body>
 </html>

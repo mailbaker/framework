@@ -1,0 +1,31 @@
+<script props>
+    module.exports = {
+        paddingTop: props['padding-top'] || '20',
+        paddingBottom: props['padding-bottom'] || '20',
+        padding: props['full-width'] ? '0' : '0 50px',
+    }
+</script>
+
+<if condition="paddingTop">
+    <tr>
+        <td height="{{ paddingTop }}" style="line-height: {{ paddingTop }}px"></td>
+    </tr>
+</if>
+
+<tr>
+    <td class="row" align="center" style="padding: {{ padding }};">
+        <table width="100%" align="center">
+            <tr>
+
+                <yield></yield>
+
+            </tr>
+        </table>
+    </td>
+</tr>
+
+<if condition="paddingBottom">
+    <tr>
+        <td height="{{ paddingBottom }}" style="line-height: {{ paddingBottom }}px"></td>
+    </tr>
+</if>

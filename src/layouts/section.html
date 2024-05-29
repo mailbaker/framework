@@ -1,7 +1,7 @@
 <script props>
 
     const backgroundUrl = props['background-url'] || ''
-    const backgroundColor = props['background-color'] || ''
+    const backgroundColor = props['background-color'] || '#ffffff'
     const backgroundPosition = props['background-position'] || 'top center' // top, center, left, right, bottom. Max 2 values
     const backgroundSize = props['background-size'] || 'auto' // auto, cover, contain
     const backgroundRepeat = props['background-repeat'] || 'repeat' // no-repeat,repeat
@@ -11,9 +11,9 @@
 
     if (backgroundUrl) {
         bgImage = 'background: ' + backgroundColor + ' url(' + backgroundUrl + ') ' + backgroundPosition + ' / ' + backgroundSize + ' ' + backgroundRepeat + '; ' +
-        'background-position: ' + backgroundPosition + ';' +
-        'background-repeat: ' + backgroundRepeat + ';' +
-        'background-size: ' + backgroundSize + ';';
+            'background-position: ' + backgroundPosition + ';' +
+            'background-repeat: ' + backgroundRepeat + ';' +
+            'background-size: ' + backgroundSize + ';';
     }
 
     if (backgroundColor) {
@@ -42,6 +42,8 @@
     module.exports = {
         paddingTop: props['padding-top'] || '20',
         paddingBottom: props['padding-bottom'] || '20',
+        borderRadius: props['border-radius'] || '0',
+        width: props.width || '640',
         backgroundUrl,
         backgroundStyle,
         backgroundColor,
@@ -51,7 +53,7 @@
     }
 </script>
 
-<table class="mb-container" align="center" background="{{ backgroundUrl }}" style="{{ backgroundStyle }}">
+<table bgcolor="{{ backgroundColor }}" align="center" width="{{ width }}" background="{{ backgroundUrl }}" style="border-radius: {{ borderRadius }}px; {{ backgroundStyle }} border-collapse: separate!important; overflow: hidden;">
     <tr>
         <td align="center" valign="top">
 
@@ -64,7 +66,7 @@
                 <div>
             </if>
 
-            <table align="center">
+            <table align="center" width="{{ width }}" style="max-width: {{ width }}px;">
 
                 <if condition="paddingTop">
                     <tr>
@@ -72,13 +74,7 @@
                     </tr>
                 </if>
 
-                <tr>
-                    <td align="center">
-
-                        <yield></yield>
-
-                    </td>
-                </tr>
+                <yield></yield>
 
                 <if condition="paddingBottom">
                     <tr>
