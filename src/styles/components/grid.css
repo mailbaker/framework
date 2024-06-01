@@ -1,5 +1,5 @@
 .mb-container {
-    @apply w-[640px] max-w-[640px] mx-auto sm:!w-full sm:!min-w-full
+    @apply mx-auto sm:!w-full sm:!min-w-full
 }
 
 .mb-row {
