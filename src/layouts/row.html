@@ -1,31 +1,41 @@
 <script props>
+
+    const isFullWidth = !!props['full-width']
+    const padding = isFullWidth ? '0' : '0 50px'
+    const rowClass = isFullWidth ? 'mb-row-full' : 'mb-row'
+
     module.exports = {
         paddingTop: props['padding-top'] || '20',
         paddingBottom: props['padding-bottom'] || '20',
-        padding: props['full-width'] ? '0' : '0 50px',
+        padding,
+        rowClass,
     }
 </script>
 
-<if condition="paddingTop">
+<table width="100%">
+
+    <if condition="paddingTop">
+        <tr>
+            <td height="{{ paddingTop }}" style="line-height: {{ paddingTop }}px"></td>
+        </tr>
+    </if>
+
     <tr>
-        <td height="{{ paddingTop }}" style="line-height: {{ paddingTop }}px"></td>
+        <td class="{{ rowClass }}" style="padding: {{ padding }};">
+            <table width="100%">
+                <tr>
+
+                    <yield></yield>
+
+                </tr>
+            </table>
+        </td>
     </tr>
-</if>
 
-<tr>
-    <td class="mb-row" align="center" style="padding: {{ padding }};">
-        <table width="100%" align="center">
-            <tr>
+    <if condition="paddingBottom">
+        <tr>
+            <td height="{{ paddingBottom }}" style="line-height: {{ paddingBottom }}px"></td>
+        </tr>
+    </if>
 
-                <yield></yield>
-
-            </tr>
-        </table>
-    </td>
-</tr>
-
-<if condition="paddingBottom">
-    <tr>
-        <td height="{{ paddingBottom }}" style="line-height: {{ paddingBottom }}px"></td>
-    </tr>
-</if>
+</table>
