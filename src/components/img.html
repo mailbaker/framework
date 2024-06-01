@@ -1,0 +1,11 @@
+<script props>
+    module.exports = {
+        src: props.src || 'https://placehold.co/800x400',
+        width: props.width || '100%',
+        height: props.height || 'auto',
+        borderRadius: props['border-radius'] || '0',
+        alt: props.alt || ''
+    }
+</script>
+
+<img src="{{ src }}" width="{{ width }}" height="{{ height }}" class="mobile-w-full" style="border-radius: {{ borderRadius }}px;"  alt="{{ alt }}"/>
