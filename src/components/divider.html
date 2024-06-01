@@ -1,0 +1,31 @@
+<script props>
+    module.exports = {
+        paddingTop: props['padding-top'] || '20',
+        paddingBottom: props['padding-bottom'] || '20',
+        width: props.width || '100%',
+        align: props.align || 'center',
+        weight: props.weight || '1',
+        style: props.style || 'solid',
+        color: props.color || '#e7e7e7'
+    }
+</script>
+
+<table width="{{ width }}" align="{{ align }}">
+
+    <if condition="paddingTop">
+        <tr>
+            <td height="{{ paddingTop }}" style="line-height: {{ paddingTop }}px"></td>
+        </tr>
+    </if>
+
+    <tr>
+        <td style="border-top: {{ weight }}px {{ style }} {{ color }};"></td>
+    </tr>
+
+    <if condition="paddingBottom">
+        <tr>
+            <td height="{{ paddingBottom }}" style="line-height: {{ paddingBottom }}px"></td>
+        </tr>
+    </if>
+
+</table>

@@ -3,6 +3,7 @@
 @import "components/grid.css";
 @import "components/typography.css";
 @import "components/buttons.css";
+@import "components/divider.css";
 
 /*Tailwind Components*/
 @tailwind components;
