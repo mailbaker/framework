@@ -1,5 +1,7 @@
 <script props>
 
+    const width = props.width || '640'
+
     const backgroundUrl = props['background-url'] || ''
     const backgroundColor = props['background-color'] || ''
     const backgroundPosition = props['background-position'] || 'top center' // top, center, left, right, bottom. Max 2 values
@@ -11,9 +13,9 @@
 
     if (backgroundUrl) {
         bgImage = 'background: ' + backgroundColor + ' url(' + backgroundUrl + ') ' + backgroundPosition + ' / ' + backgroundSize + ' ' + backgroundRepeat + '; ' +
-        'background-position: ' + backgroundPosition + ';' +
-        'background-repeat: ' + backgroundRepeat + ';' +
-        'background-size: ' + backgroundSize + ';';
+            'background-position: ' + backgroundPosition + ';' +
+            'background-repeat: ' + backgroundRepeat + ';' +
+            'background-size: ' + backgroundSize + ';';
     }
 
     if (backgroundColor) {
@@ -39,9 +41,19 @@
         return backgroundSize === 'cover' ? 'atleast' : 'atmost'
     }
 
+    function widthUnit() {
+        if (width.endsWith('%')) {
+            return '';
+        } else {
+            return 'px';
+        }
+    }
+
     module.exports = {
         paddingTop: props['padding-top'] || '20',
         paddingBottom: props['padding-bottom'] || '20',
+        width,
+        widthUnit: widthUnit(),
         backgroundUrl,
         backgroundStyle,
         backgroundColor,
@@ -51,9 +63,9 @@
     }
 </script>
 
-<table class="mb-container" align="center" background="{{ backgroundUrl }}" style="{{ backgroundStyle }}">
+<table width="100%" align="center" bgcolor="{{ backgroundColor }}" background="{{ backgroundUrl }}" style="{{ backgroundStyle }}">
     <tr>
-        <td align="center" valign="top">
+        <td align="center" valign="top" class="px-2">
 
             <if condition="backgroundUrl">
                 <!--[if mso | IE]>
@@ -64,7 +76,7 @@
                 <div>
             </if>
 
-            <table align="center">
+            <table class="mb-container" align="center" width="{{ width }}" style="max-width: {{ width }}{{ widthUnit }};">
 
                 <if condition="paddingTop">
                     <tr>
