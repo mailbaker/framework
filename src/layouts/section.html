@@ -1,5 +1,8 @@
 <script props>
 
+    const width = props.width || '100%'
+    const borderRadius = props['border-radius'] || ''
+
     const backgroundUrl = props['background-url'] || ''
     const backgroundColor = props['background-color'] || '#ffffff'
     const backgroundPosition = props['background-position'] || 'top center' // top, center, left, right, bottom. Max 2 values
@@ -39,11 +42,25 @@
         return backgroundSize === 'cover' ? 'atleast' : 'atmost'
     }
 
+    function widthUnit() {
+        if (width.endsWith('%')) {
+            return '';
+        } else {
+            return 'px';
+        }
+    }
+
+    let borderStyle = ''
+    if (borderRadius) {
+        borderStyle = 'border-radius: ' + borderRadius + 'px; border-collapse: separate!important; overflow: hidden;';
+    }
+
     module.exports = {
         paddingTop: props['padding-top'] || '20',
         paddingBottom: props['padding-bottom'] || '20',
-        borderRadius: props['border-radius'] || '0',
-        width: props.width || '640',
+        borderStyle,
+        width,
+        widthUnit: widthUnit(),
         backgroundUrl,
         backgroundStyle,
         backgroundColor,
@@ -53,9 +70,9 @@
     }
 </script>
 
-<table bgcolor="{{ backgroundColor }}" align="center" width="{{ width }}" background="{{ backgroundUrl }}" style="border-radius: {{ borderRadius }}px; {{ backgroundStyle }} border-collapse: separate!important; overflow: hidden;">
+<table width="{{ width }}" bgcolor="{{ backgroundColor }}" background="{{ backgroundUrl }}" style="max-width: {{ width }}{{ widthUnit }}; {{ backgroundStyle }} {{ borderStyle }}">
     <tr>
-        <td align="center" valign="top">
+        <td>
 
             <if condition="backgroundUrl">
                 <!--[if mso | IE]>
@@ -66,7 +83,7 @@
                 <div>
             </if>
 
-            <table align="center" width="{{ width }}" style="max-width: {{ width }}px;">
+            <table>
 
                 <if condition="paddingTop">
                     <tr>
@@ -74,7 +91,13 @@
                     </tr>
                 </if>
 
-                <yield></yield>
+                <tr>
+                    <td>
+
+                        <yield></yield>
+
+                    </td>
+                </tr>
 
                 <if condition="paddingBottom">
                     <tr>
