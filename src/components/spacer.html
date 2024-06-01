@@ -1,0 +1,13 @@
+<script props>
+    module.exports = {
+        width: props.width || '100%',
+        height: props.height || '40',
+        align: props.align || 'center'
+    }
+</script>
+
+<table width="{{ width }}" align="{{ align }}">
+    <tr>
+        <td height="{{ height }}" style="line-height: {{ height }}px;"></td>
+    </tr>
+</table>
