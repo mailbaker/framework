@@ -2,6 +2,7 @@
 @import "components/base.css";
 @import "components/grid.css";
 @import "components/typography.css";
+@import "components/buttons.css";
 
 /*Tailwind Components*/
 @tailwind components;
