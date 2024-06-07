@@ -13,6 +13,7 @@ export default {
                 './src/templates/**/*.html',
             ],
         },
+        fail: 'silent' // or 'verbose'
     },
     plugins: [
         vituum({
@@ -20,7 +21,6 @@ export default {
                 dir: './src/templates'
             }
         }),
-        tailwindcss(),
         posthtml({
             root: './src',
             include: '**/*.html',
@@ -40,6 +40,7 @@ export default {
                 preserveImportant: true, // false
             }
         }),
+        tailwindcss(),
         beautify({
             inDir: 'dist',
             html: {
