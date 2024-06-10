@@ -4,13 +4,72 @@
     const padding = isFullWidth ? '0' : '0 50px'
     const rowClass = isFullWidth ? 'mb-row-full' : 'mb-row'
 
+    const backgroundUrl = props['background-url'] || ''
+    const backgroundColor = props['background-color'] || '#ffffff'
+    const backgroundPosition = props['background-position'] || 'top center' // top, center, left, right, bottom. Max 2 values
+    const backgroundSize = props['background-size'] || 'auto' // auto, cover, contain
+    const backgroundRepeat = props['background-repeat'] || 'repeat' // no-repeat,repeat
+
+    let bgImage = '';
+    let bgColor = '';
+
+    if (backgroundUrl) {
+        bgImage = 'background: ' + backgroundColor + ' url(' + backgroundUrl + ') ' + backgroundPosition + ' / ' + backgroundSize + ' ' + backgroundRepeat + '; ' +
+            'background-position: ' + backgroundPosition + ';' +
+            'background-repeat: ' + backgroundRepeat + ';' +
+            'background-size: ' + backgroundSize + ';';
+    }
+
+    if (backgroundColor) {
+        bgColor = 'background-color: ' + backgroundColor + ';';
+    }
+
+    let backgroundStyle = bgImage + bgColor;
+
+    function msoBgPosition() {
+        const posSplit = backgroundPosition.split(' ');
+
+        const val1 = posSplit[0] === 'top' ? '-0.5' : (posSplit[0] === 'bottom' ? '0.5' : '0');
+        const val2 = posSplit[1] === 'left' ? '-0.5' : (posSplit[0] === 'right' ? '0.5' : '0');
+
+        return val2 + ',' + val1
+    }
+
+    function msoBgType() {
+        return backgroundRepeat === 'no-repeat' ? 'frame' : 'tile'
+    }
+
+    function msoBgAspect() {
+        return backgroundSize === 'cover' ? 'atleast' : 'atmost'
+    }
+
     module.exports = {
         paddingTop: props['padding-top'] || '20',
         paddingBottom: props['padding-bottom'] || '20',
         padding,
         rowClass,
+        backgroundUrl,
+        backgroundStyle,
+        backgroundColor,
+        msoBgPosition: msoBgPosition(),
+        msoBgType: msoBgType(),
+        msoBgAspect: msoBgAspect(),
     }
 </script>
+
+<if condition="backgroundUrl">
+
+    <table width="100%" bgcolor="{{ backgroundColor }}" background="{{ backgroundUrl }}" style="{{ backgroundStyle }}">
+        <tr>
+            <td>
+
+                <!--[if mso | IE]>
+                <v:rect style="mso-width-percent:1000;" xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false">
+                    <v:fill origin="{{ msoBgPosition }}" position="{{ msoBgPosition }}" src="{{ backgroundUrl }}" color="{{ backgroundColor }}" type="{{ msoBgType }}" size="1,1" aspect="{{ msoBgAspect }}" />
+                    <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
+                <![endif]-->
+                <div>
+</if>
 
 <table width="100%">
 
@@ -39,3 +98,12 @@
     </if>
 
 </table>
+
+<if condition="backgroundUrl">
+                </div>
+                <!--[if mso | IE]></v:textbox></v:rect><![endif]-->
+
+            </td>
+        </tr>
+    </table>
+</if>
