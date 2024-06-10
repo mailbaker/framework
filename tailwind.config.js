@@ -18,7 +18,7 @@ export default {
     },
     theme: {
         screens: {
-            sm: {'max': '639px'},
+            sm: {'max': '655px'},
             xs: {'max': '424px'},
         },
         extend: {
