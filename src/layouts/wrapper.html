@@ -2,7 +2,7 @@
 
     const width = props.width || '640'
 
-    const backgroundUrl = props['background-url'] || ''
+    const backgroundUrl = props['background-url'] || 'none'
     const backgroundColor = props['background-color'] || ''
     const backgroundPosition = props['background-position'] || 'top center' // top, center, left, right, bottom. Max 2 values
     const backgroundSize = props['background-size'] || 'auto' // auto, cover, contain
@@ -11,7 +11,7 @@
     let bgImage = '';
     let bgColor = '';
 
-    if (backgroundUrl) {
+    if (backgroundUrl !== 'none') {
         bgImage = 'background: ' + backgroundColor + ' url(' + backgroundUrl + ') ' + backgroundPosition + ' / ' + backgroundSize + ' ' + backgroundRepeat + '; ' +
             'background-position: ' + backgroundPosition + ';' +
             'background-repeat: ' + backgroundRepeat + ';' +
@@ -41,6 +41,17 @@
         return backgroundSize === 'cover' ? 'atleast' : 'atmost'
     }
 
+    function msoBgSize() {
+        const bgSplit = backgroundSize.split(' ');
+        if (backgroundSize === 'cover' || backgroundSize === 'contain') {
+            return '1,1';
+        } else if (bgSplit.length === 1) {
+            return backgroundSize;
+        } else {
+            return backgroundSize.join(',')
+        }
+    }
+
     function widthUnit() {
         if (width.endsWith('%')) {
             return '';
@@ -60,6 +71,7 @@
         msoBgPosition: msoBgPosition(),
         msoBgType: msoBgType(),
         msoBgAspect: msoBgAspect(),
+        msoBgSize: msoBgSize(),
     }
 </script>
 
@@ -67,13 +79,12 @@
     <tr>
         <td align="center" valign="top" class="px-2">
 
-            <if condition="backgroundUrl">
+            <if condition="backgroundUrl !== 'none'">
                 <!--[if mso | IE]>
                 <v:rect style="mso-width-percent:1000;" xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false">
-                    <v:fill origin="{{ msoBgPosition }}" position="{{ msoBgPosition }}" src="{{ backgroundUrl }}" color="{{ backgroundColor }}" type="{{ msoBgType }}" size="1,1" aspect="{{ msoBgAspect }}" />
+                    <v:fill origin="{{ msoBgPosition }}" position="{{ msoBgPosition }}" src="{{ backgroundUrl }}" color="{{ backgroundColor }}" type="{{ msoBgType }}" size="{{ msoBgSize }}" aspect="{{ msoBgAspect }}" />
                     <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
                 <![endif]-->
-                <div>
             </if>
 
             <table class="mb-container" align="center" width="{{ width }}" style="max-width: {{ width }}{{ widthUnit }};">
@@ -85,7 +96,7 @@
                 </if>
 
                 <tr>
-                    <td align="center">
+                    <td align="center" valign="top">
 
                         <yield></yield>
 
@@ -100,8 +111,7 @@
 
             </table>
 
-            <if condition="backgroundUrl">
-                </div>
+            <if condition="backgroundUrl !== 'none'">
                 <!--[if mso | IE]></v:textbox></v:rect><![endif]-->
             </if>
 
