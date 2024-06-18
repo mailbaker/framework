@@ -3,9 +3,10 @@
 }
 
 .mb-row {
-    @apply sm:!px-5
+    @apply sm:!w-[20px]
 }
 
 .mb-col {
     @apply sm:!block sm:!w-full
 }
+
