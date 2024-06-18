@@ -18,7 +18,7 @@ export default {
     },
     theme: {
         screens: {
-            sm: {'max': '639px'},
+            sm: {'max': '655px'},
             xs: {'max': '424px'},
         },
         extend: {
@@ -38,19 +38,19 @@ export default {
                 inter: ['Inter', 'sans-serif']
             },
             fontSize: {
-                xs: "12px",
-                sm: "14px",
-                base: "16px",
-                lg: "18px",
-                xl: "20px",
-                "2xl": "24px",
-                "3xl": "30px",
-                "4xl": "36px",
-                "5xl": "48px",
-                "6xl": "60px",
-                "7xl": "72px",
-                "8xl": "96px",
-                "9xl": "128px",
+                xs: ["12px", { lineHeight: "100%" }],
+                sm: ["14px", { lineHeight: "100%" }],
+                base: ["16px", { lineHeight: "100%" }],
+                lg: ["18px", { lineHeight: "100%" }],
+                xl: ["20px", { lineHeight: "100%" }],
+                "2xl": ["24px", { lineHeight: "100%" }],
+                "3xl": ["30px", { lineHeight: "100%" }],
+                "4xl": ["36px", { lineHeight: "100%" }],
+                "5xl": ["48px", { lineHeight: "100%" }],
+                "6xl": ["60px", { lineHeight: "100%" }],
+                "7xl": ["72px", { lineHeight: "100%" }],
+                "8xl": ["96px", { lineHeight: "100%" }],
+                "9xl": ["128px", { lineHeight: "100%" }],
             },
             lineHeight: {
                 none: "100%",
