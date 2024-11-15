@@ -7,3 +7,7 @@ body {
     @apply hidden max-h-0 max-w-0 text-[1px] leading-[1px] opacity-0 overflow-hidden;
     mso-hide:all;
 }
+
+img {
+    @apply max-w-full align-middle;
+}
